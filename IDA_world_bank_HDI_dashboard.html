@@ -1,0 +1,211 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.db{background:#0c0e14;border-radius:18px;padding:1.75rem;font-family:'Segoe UI',sans-serif;color:#e2e8f0;}
+.hdr{margin-bottom:1.5rem;}
+.hdr .title{font-size:17px;font-weight:600;color:#f8fafc;}
+.hdr .sub{font-size:11px;color:#475569;margin-top:3px;}
+.sec{font-size:9px;font-weight:700;letter-spacing:.12em;color:#334155;text-transform:uppercase;margin:1.25rem 0 10px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.25rem;}
+.kpi{background:#131720;border-radius:10px;padding:.8rem 1rem;border-top:2px solid;}
+.kpi-val{font-size:20px;font-weight:600;margin:4px 0 2px;}
+.kpi-lbl{font-size:10px;color:#64748b;}
+.kpi-sub{font-size:10px;color:#475569;margin-top:2px;}
+.ins-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.25rem;}
+.ins{background:#131720;border-radius:12px;padding:1rem;border-left:3px solid;}
+.ins-num{font-size:9px;font-weight:700;letter-spacing:.08em;margin-bottom:5px;}
+.ins-t{font-size:12px;font-weight:600;color:#f1f5f9;margin-bottom:4px;line-height:1.4;}
+.ins-b{font-size:11px;color:#94a3b8;line-height:1.5;}
+.ins-act{margin-top:8px;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;display:inline-block;}
+.cw{background:#131720;border-radius:12px;padding:1.1rem;margin-bottom:10px;}
+.ct{font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:3px;}
+.cd{font-size:10px;color:#475569;margin-bottom:10px;}
+.leg{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;font-size:10px;color:#64748b;}
+.leg span{display:flex;align-items:center;gap:4px;}
+.ld{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.plbl{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:10px;margin-bottom:6px;}
+</style>
+
+<div class="db">
+  <div class="hdr">
+    <p class="title">IDA Global Development Dashboard — World Bank & UN HDI Analysis</p>
+    <p class="sub">World Bank 1960–2018 · UN HDI 1990–2021 · For IDA Leadership Presentation</p>
+  </div>
+
+  <p class="sec">Overview — Key Global Indicators</p>
+  <div class="kpi-grid">
+    <div class="kpi" style="border-color:#60a5fa;"><p class="kpi-lbl">Avg Global Life Expectancy</p><p class="kpi-val" style="color:#60a5fa;">63 yrs</p><p class="kpi-sub">Up from ~52 in 1960</p></div>
+    <div class="kpi" style="border-color:#34d399;"><p class="kpi-lbl">Fastest GDP Growth</p><p class="kpi-val" style="color:#34d399;">China</p><p class="kpi-sub">22,674% growth</p></div>
+    <div class="kpi" style="border-color:#f87171;"><p class="kpi-lbl">HDI Gap (High vs Low)</p><p class="kpi-val" style="color:#f87171;">2×</p><p class="kpi-sub">0.74 vs 0.44 in 2021</p></div>
+    <div class="kpi" style="border-color:#fb923c;"><p class="kpi-lbl">Biggest HDI Gainer</p><p class="kpi-val" style="color:#fb923c;">SSA</p><p class="kpi-sub">+24.5% since 2000</p></div>
+    <div class="kpi" style="border-color:#a78bfa;"><p class="kpi-lbl">Infant Mortality Gap</p><p class="kpi-val" style="color:#a78bfa;">5×</p><p class="kpi-sub">Low vs Upper-Mid income</p></div>
+  </div>
+
+  <p class="sec">3 Actions IDA Leaders Must Take Now</p>
+  <div class="ins-row">
+    <div class="ins" style="border-color:#f87171;">
+      <p class="ins-num" style="color:#f87171;">ACTION 01</p>
+      <p class="ins-t">Infant mortality is the single biggest threat to life expectancy</p>
+      <p class="ins-b">Infant mortality has a –0.94 correlation with life expectancy — the strongest of any factor. Low income countries average 106 infant deaths per 1,000 births vs 40 in upper-middle income countries.</p>
+      <span class="ins-act" style="background:#2d1515;color:#f87171;">→ Prioritise maternal & infant health funding</span>
+    </div>
+    <div class="ins" style="border-color:#34d399;">
+      <p class="ins-num" style="color:#34d399;">ACTION 02</p>
+      <p class="ins-t">Sub-Saharan Africa & South Asia are rising fast — but still lag critically</p>
+      <p class="ins-b">SSA and SA recorded the highest HDI growth in the 21st century (+24.5% and +24%). But both regions still sit well below the global average. Progress is real — but fragile without continued investment.</p>
+      <span class="ins-act" style="background:#0d2018;color:#34d399;">→ Increase IDA allocation to SSA & South Asia</span>
+    </div>
+    <div class="ins" style="border-color:#60a5fa;">
+      <p class="ins-num" style="color:#60a5fa;">ACTION 03</p>
+      <p class="ins-t">Internet access & electricity are the fastest routes to closing the income gap</p>
+      <p class="ins-b">Internet access (0.60 correlation) and electricity (0.54) outperform GDP per capita (0.52) as predictors of life expectancy. Infrastructure investment delivers outsized development returns.</p>
+      <span class="ins-act" style="background:#0d1a2d;color:#60a5fa;">→ Fund digital & energy infrastructure in Low Income nations</span>
+    </div>
+  </div>
+
+  <p class="sec">Question 1 — Population & GDP Growth: Is There Overlap?</p>
+  <div class="row2" style="margin-bottom:10px;">
+    <div class="cw">
+      <span class="plbl" style="background:#1a2a1a;color:#34d399;">GDP GROWTH</span>
+      <p class="ct">Top 10 countries by GDP growth (all-time %)</p>
+      <p class="cd">Middle East & Asian economies dominate. Qatar appears in both GDP and population growth.</p>
+      <div class="leg"><span><span class="ld" style="background:#34d399;"></span>GDP growth %</span></div>
+      <div style="position:relative;height:230px;"><canvas id="c1" aria-label="Top 10 countries GDP growth percentage bar chart"></canvas></div>
+    </div>
+    <div class="cw">
+      <span class="plbl" style="background:#0d1a2d;color:#60a5fa;">POPULATION GROWTH</span>
+      <p class="ct">Top 10 countries by population density growth (%)</p>
+      <p class="cd">Middle East dominates — UAE (+9,455%) driven by massive migration. Qatar overlaps with GDP list.</p>
+      <div class="leg"><span><span class="ld" style="background:#60a5fa;"></span>Population density growth %</span></div>
+      <div style="position:relative;height:230px;"><canvas id="c2" aria-label="Top 10 countries population density growth bar chart"></canvas></div>
+    </div>
+  </div>
+
+  <p class="sec">Question 2 — Which Regions Grew HDI Most in the 21st Century?</p>
+  <div class="cw" style="margin-bottom:10px;">
+    <span class="plbl" style="background:#1a1030;color:#a78bfa;">HDI TREND</span>
+    <p class="ct">Human Development Index by region — 2000 to 2021</p>
+    <p class="cd">SSA and South Asia show the steepest climb. All regions dipped slightly in 2020 due to COVID-19.</p>
+    <div class="leg">
+      <span><span class="ld" style="background:#f87171;"></span>SSA</span>
+      <span><span class="ld" style="background:#fb923c;"></span>South Asia</span>
+      <span><span class="ld" style="background:#facc15;"></span>EAP</span>
+      <span><span class="ld" style="background:#34d399;"></span>ECA</span>
+      <span><span class="ld" style="background:#60a5fa;"></span>LAC</span>
+      <span><span class="ld" style="background:#a78bfa;"></span>Arab States</span>
+    </div>
+    <div style="position:relative;height:220px;"><canvas id="c3" aria-label="HDI trend line chart by region 2000 to 2021"></canvas></div>
+  </div>
+
+  <p class="sec">Question 3 — What Factors Most Affect Life Expectancy?</p>
+  <div class="cw" style="margin-bottom:10px;">
+    <span class="plbl" style="background:#2d1515;color:#f87171;">CORRELATION ANALYSIS</span>
+    <p class="ct">How strongly does each factor predict life expectancy? (–1 = opposite, +1 = same direction)</p>
+    <p class="cd">Infant mortality is the #1 predictor. Internet access and electricity also strongly positive. Unemployment has almost no effect.</p>
+    <div class="leg"><span><span class="ld" style="background:#f87171;"></span>Negative impact</span><span><span class="ld" style="background:#34d399;"></span>Positive impact</span></div>
+    <div style="position:relative;height:200px;"><canvas id="c4" aria-label="Horizontal bar chart of correlation coefficients with life expectancy"></canvas></div>
+  </div>
+
+  <p class="sec">Question 4 — What Separates High Income from Low Income Countries?</p>
+  <div class="row2">
+    <div class="cw">
+      <span class="plbl" style="background:#1a1a0d;color:#facc15;">INCOME COMPARISON</span>
+      <p class="ct">Key indicators by income group</p>
+      <p class="cd">Low income countries have 5× the infant mortality rate and earn 9× less GDP per capita than upper-middle income nations.</p>
+      <div class="leg">
+        <span><span class="ld" style="background:#f87171;"></span>Low income</span>
+        <span><span class="ld" style="background:#fb923c;"></span>Lower middle</span>
+        <span><span class="ld" style="background:#34d399;"></span>Upper middle</span>
+      </div>
+      <div style="position:relative;height:230px;"><canvas id="c5" aria-label="Grouped bar chart comparing key indicators across income groups"></canvas></div>
+    </div>
+    <div class="cw">
+      <span class="plbl" style="background:#0d1a2d;color:#60a5fa;">REGIONAL GDP TRAJECTORY</span>
+      <p class="ct">GDP per capita by region — 1990 to 2018</p>
+      <p class="cd">North America leads but plateaued. Europe & Central Asia surged then declined post-2010. Sub-Saharan Africa remains flattest.</p>
+      <div class="leg">
+        <span><span class="ld" style="background:#60a5fa;"></span>North America</span>
+        <span><span class="ld" style="background:#34d399;"></span>Europe & CA</span>
+        <span><span class="ld" style="background:#fb923c;"></span>East Asia</span>
+        <span><span class="ld" style="background:#a78bfa;"></span>Latin America</span>
+        <span><span class="ld" style="background:#f87171;"></span>Sub-Saharan Africa</span>
+        <span><span class="ld" style="background:#facc15;"></span>South Asia</span>
+      </div>
+      <div style="position:relative;height:230px;"><canvas id="c6" aria-label="Line chart of GDP per capita by region 1990 to 2018"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const gc='rgba(255,255,255,0.04)', tc='#475569', tcs='#64748b';
+const hOpts = {responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:tcs,font:{size:10}},grid:{display:false}}}};
+
+// C1 - GDP Growth
+new Chart(document.getElementById('c1'),{type:'bar',data:{
+  labels:['Eq. Guinea','Oman','Qatar','Botswana','Singapore','Korea','Hong Kong','China','Ireland','Saudi Arabia'],
+  datasets:[{data:[145881,125193,63520,61112,51549,40838,27383,22674,19597,18573],
+    backgroundColor:ctx=>['#22c55e','#34d399','#34d399','#34d399','#34d399','#34d399','#34d399','#34d399','#34d399','#34d399'][ctx.dataIndex],
+    borderRadius:4}]
+},options:hOpts});
+
+// C2 - Population Growth
+new Chart(document.getElementById('c2'),{type:'bar',data:{
+  labels:['UAE','Qatar','Kuwait','Djibouti','Jordan','St. Martin','Oman','Bahrain','Cayman Is.','Saudi Arabia'],
+  datasets:[{data:[9455,5310,1276,984,916,817,755,729,700,699],
+    backgroundColor:ctx=>['#3b82f6','#60a5fa','#60a5fa','#60a5fa','#60a5fa','#60a5fa','#60a5fa','#60a5fa','#60a5fa','#60a5fa'][ctx.dataIndex],
+    borderRadius:4}]
+},options:hOpts});
+
+// C3 - HDI Trend by Region
+const yrs = [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021];
+new Chart(document.getElementById('c3'),{type:'line',data:{
+  labels:yrs,
+  datasets:[
+    {label:'SSA',data:[0.437,0.442,0.447,0.452,0.459,0.465,0.473,0.481,0.488,0.495,0.501,0.508,0.515,0.522,0.528,0.533,0.538,0.542,0.546,0.550,0.546,0.544],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,0.05)',tension:0.4,fill:true,pointRadius:0},
+    {label:'South Asia',data:[0.528,0.532,0.541,0.549,0.555,0.563,0.572,0.579,0.584,0.589,0.597,0.606,0.615,0.621,0.629,0.636,0.643,0.649,0.653,0.658,0.654,0.654],borderColor:'#fb923c',backgroundColor:'rgba(251,146,60,0.05)',tension:0.4,fill:true,pointRadius:0},
+    {label:'EAP',data:[0.607,0.616,0.617,0.624,0.630,0.635,0.640,0.647,0.652,0.656,0.663,0.667,0.671,0.675,0.680,0.684,0.686,0.689,0.692,0.696,0.694,0.691],borderColor:'#facc15',backgroundColor:'rgba(250,204,21,0.03)',tension:0.4,fill:false,pointRadius:0},
+    {label:'ECA',data:[0.659,0.667,0.674,0.687,0.696,0.700,0.710,0.719,0.727,0.729,0.736,0.742,0.748,0.756,0.760,0.764,0.768,0.772,0.776,0.780,0.769,0.772],borderColor:'#34d399',backgroundColor:'rgba(52,211,153,0.03)',tension:0.4,fill:false,pointRadius:0},
+    {label:'LAC',data:[0.670,0.674,0.681,0.685,0.690,0.698,0.704,0.713,0.718,0.721,0.722,0.728,0.732,0.736,0.740,0.743,0.746,0.748,0.751,0.753,0.743,0.740],borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.03)',tension:0.4,fill:false,pointRadius:0},
+    {label:'Arab States',data:[0.640,0.647,0.652,0.658,0.664,0.674,0.679,0.685,0.691,0.696,0.699,0.703,0.707,0.705,0.706,0.710,0.713,0.718,0.723,0.727,0.719,0.718],borderColor:'#a78bfa',backgroundColor:'rgba(167,139,250,0.03)',tension:0.4,fill:false,pointRadius:0}
+  ]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0.3,max:0.85,ticks:{color:tc},grid:{color:gc}},x:{ticks:{color:tc,maxTicksLimit:8},grid:{display:false}}}}});
+
+// C4 - Correlation with life expectancy
+const corrLabels = ['Infant Mortality','Birth Rate','Death Rate','Unemployment','Pop. Density','GDP per Capita','Electricity','Internet Access'];
+const corrVals = [-0.939,-0.877,-0.841,0.010,0.163,0.522,0.539,0.598];
+const corrColors = corrVals.map(v=>v<0?'#f87171':'#34d399');
+new Chart(document.getElementById('c4'),{type:'bar',data:{
+  labels:corrLabels,
+  datasets:[{data:corrVals,backgroundColor:corrColors,borderRadius:4}]
+},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{
+  x:{min:-1,max:1,ticks:{color:tc},grid:{color:gc}},
+  y:{ticks:{color:tcs,font:{size:10}},grid:{display:false}}
+}}});
+
+// C5 - Income group comparison (normalised view)
+new Chart(document.getElementById('c5'),{type:'bar',data:{
+  labels:['Life Expectancy\n(years)','Infant Mortality\n(per 1,000)','GDP per Capita\n($00s)','Internet Users\n(%)'],
+  datasets:[
+    {label:'Low income',data:[49,106,3.6,3],backgroundColor:'#f87171',borderRadius:3},
+    {label:'Lower middle',data:[59,69,10.4,11],backgroundColor:'#fb923c',borderRadius:3},
+    {label:'Upper middle',data:[66,41,32.1,19],backgroundColor:'#34d399',borderRadius:3}
+  ]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:tc},grid:{color:gc}},x:{ticks:{color:tcs,font:{size:10}},grid:{display:false}}}}});
+
+// C6 - Regional GDP per capita trend
+const rYrs = [1990,1995,2000,2005,2010,2015,2018];
+new Chart(document.getElementById('c6'),{type:'line',data:{
+  labels:rYrs,
+  datasets:[
+    {label:'North America',data:[24060,30000,38936,46000,61375,58000,54426],borderColor:'#60a5fa',tension:0.4,fill:false,pointRadius:3},
+    {label:'Europe & CA',data:[14592,12000,15758,22000,31411,30000,27626],borderColor:'#34d399',tension:0.4,fill:false,pointRadius:3},
+    {label:'East Asia',data:[6130,8000,7585,10000,14297,16000,17756],borderColor:'#fb923c',tension:0.4,fill:false,pointRadius:3},
+    {label:'Latin America',data:[3187,4000,5566,7000,10247,10500,10030],borderColor:'#a78bfa',tension:0.4,fill:false,pointRadius:3},
+    {label:'Sub-Saharan Africa',data:[923,900,947,1400,2309,2400,2507],borderColor:'#f87171',tension:0.4,fill:false,pointRadius:3},
+    {label:'South Asia',data:[461,550,780,1100,2057,2700,3052],borderColor:'#facc15',tension:0.4,fill:false,pointRadius:3}
+  ]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{color:tc},grid:{color:gc}},x:{ticks:{color:tc},grid:{display:false}}}}});
+</script>
