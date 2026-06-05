@@ -1,0 +1,163 @@
+
+<h2 class="sr-only">AI Jobs 2030 HR Leadership Dashboard — actionable insights on automation risk, skills, industry impact, emerging roles, and regional trends</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:transparent;}
+.db{background:#0c0e14;border-radius:18px;padding:1.75rem;font-family:'Segoe UI',sans-serif;color:#e2e8f0;}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;flex-wrap:wrap;gap:8px;}
+.hdr-l .title{font-size:16px;font-weight:600;color:#f8fafc;}
+.hdr-l .sub{font-size:11px;color:#475569;margin-top:3px;}
+.badge{background:#1e2535;border-radius:20px;padding:4px 12px;font-size:10px;color:#64748b;}
+.sec{font-size:9px;font-weight:700;letter-spacing:.12em;color:#334155;text-transform:uppercase;margin:0 0 10px;}
+.ins-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+.ins{border-radius:12px;padding:1rem 1.1rem;border-top:3px solid;}
+.ins-num{font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;}
+.ins-t{font-size:12px;font-weight:600;color:#f1f5f9;margin-bottom:5px;line-height:1.4;}
+.ins-b{font-size:11px;color:#94a3b8;line-height:1.5;}
+.ins-action{margin-top:8px;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;display:inline-block;}
+.cw{background:#131720;border-radius:12px;padding:1.1rem;margin-bottom:10px;}
+.ct{font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:4px;}
+.cd{font-size:10px;color:#475569;margin-bottom:10px;}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;font-size:10px;color:#64748b;}
+.leg span{display:flex;align-items:center;gap:4px;}
+.ld{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.row3{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:10px;}
+.priority-label{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:10px;margin-bottom:6px;}
+</style>
+
+<div class="db">
+  <div class="hdr">
+    <div class="hdr-l">
+      <p class="title">AI & The Future of Work — 2030 Outlook</p>
+      <p class="sub">Prepared for HR Leadership · 3,000 employees · 10 industries · 10 countries</p>
+    </div>
+    <span class="badge">Confidential · June 2026</span>
+  </div>
+
+  <p class="sec">3 things HR leadership should act on today</p>
+  <div class="ins-row">
+    <div class="ins" style="background:#1a0f0f;border-color:#ef4444;">
+      <p class="ins-num" style="color:#ef4444;">ACTION 01</p>
+      <p class="ins-t">1 in 2 employees is at risk of being replaced by AI</p>
+      <p class="ins-b">Average automation risk is 51% across all roles. Finance and Government teams are most exposed at 53%. This is not a future problem — it starts now.</p>
+      <span class="ins-action" style="background:#2d1515;color:#f87171;">→ Audit high-risk roles immediately</span>
+    </div>
+    <div class="ins" style="background:#0f1a12;border-color:#34d399;">
+      <p class="ins-num" style="color:#34d399;">ACTION 02</p>
+      <p class="ins-t">Cloud skills & leadership are the most valuable things to train for</p>
+      <p class="ins-b">Cloud Computing, Leadership and Communication dominate the required skills list. Retraining programmes should target these — not just technical skills alone.</p>
+      <span class="ins-action" style="background:#0d2018;color:#34d399;">→ Launch reskilling programme now</span>
+    </div>
+    <div class="ins" style="background:#0f1420;border-color:#60a5fa;">
+      <p class="ins-num" style="color:#60a5fa;">ACTION 03</p>
+      <p class="ins-t">The talent market is splitting — act fast or lose people</p>
+      <p class="ins-b">34% of roles are growing, 33% declining. Germany, Australia and Japan lead in job growth. Organisations that move first on AI adoption will attract the best talent.</p>
+      <span class="ins-action" style="background:#0d1a2d;color:#60a5fa;">→ Revise hiring strategy for 2026</span>
+    </div>
+  </div>
+
+  <p class="sec">Priority 1 — Jobs most at risk</p>
+  <div class="cw" style="margin-bottom:10px;">
+    <span class="priority-label" style="background:#2d1515;color:#f87171;">HIGHEST RISK</span>
+    <p class="ct">Which job roles are most likely to be automated?</p>
+    <p class="cd">Higher bar = more likely to be replaced. Score out of 1.0</p>
+    <div class="leg"><span><span class="ld" style="background:#f87171;"></span>Automation risk score</span></div>
+    <div style="position:relative;height:200px;"><canvas id="c1" role="img" aria-label="Horizontal bar chart of top 8 job roles by automation risk score. DevOps Engineer leads at 0.57.">DevOps Engineer is highest risk at 0.57.</canvas></div>
+  </div>
+
+  <p class="sec">Priority 2 — Skills to develop urgently</p>
+  <div class="cw">
+    <span class="priority-label" style="background:#1a2a1a;color:#34d399;">URGENT SKILLS</span>
+    <p class="ct">What skills does your workforce need most by 2030?</p>
+    <p class="cd">Based on how often each skill appears in required job profiles across 3,000 employees</p>
+    <div class="leg"><span><span class="ld" style="background:#34d399;"></span>Times skill is required</span></div>
+    <div style="position:relative;height:200px;"><canvas id="c2" role="img" aria-label="Horizontal bar chart of top 8 required skills by frequency. Cloud Computing leads at 785.">Cloud Computing is most in-demand at 785 mentions.</canvas></div>
+  </div>
+
+  <p class="sec" style="margin-top:10px;">Priority 3 — Industry impact</p>
+  <div class="cw">
+    <span class="priority-label" style="background:#1a1030;color:#a78bfa;">INDUSTRY VIEW</span>
+    <p class="ct">Which industries face the most risk — and have the most opportunity?</p>
+    <p class="cd">Red = how exposed the industry is to automation. Purple = how much future demand the industry has for workers</p>
+    <div class="leg"><span><span class="ld" style="background:#f87171;"></span>Automation risk</span><span><span class="ld" style="background:#a78bfa;"></span>Future demand</span></div>
+    <div style="position:relative;height:200px;"><canvas id="c3" role="img" aria-label="Grouped bar chart of automation risk and future demand per industry. Finance and Government highest risk.">Finance and Government highest risk; all industries show strong future demand.</canvas></div>
+  </div>
+
+  <div class="row2" style="margin-top:10px;">
+    <div>
+      <p class="sec">Priority 4 — Emerging roles</p>
+      <div class="cw" style="margin-bottom:0;">
+        <span class="priority-label" style="background:#0d1a2d;color:#60a5fa;">GROWTH ROLES</span>
+        <p class="ct">Which roles will be most in demand?</p>
+        <p class="cd">Higher score = stronger future demand</p>
+        <div class="leg"><span><span class="ld" style="background:#60a5fa;"></span>Future demand score</span></div>
+        <div style="position:relative;height:210px;"><canvas id="c4" role="img" aria-label="Horizontal bar chart of top 8 emerging job roles by future demand score. Software Developer leads at 0.63.">Software Developer leads at 0.63.</canvas></div>
+      </div>
+    </div>
+    <div>
+      <p class="sec">Priority 5 — Regional trends</p>
+      <div class="cw" style="margin-bottom:0;">
+        <span class="priority-label" style="background:#1a1a0d;color:#facc15;">GLOBAL VIEW</span>
+        <p class="ct">Where is job growth happening fastest?</p>
+        <p class="cd">Average projected job growth % by country</p>
+        <div class="leg"><span><span class="ld" style="background:#facc15;"></span>Job growth %</span></div>
+        <div style="position:relative;height:210px;"><canvas id="c5" role="img" aria-label="Bar chart of average job growth percentage by country. Germany leads at 18.9%.">Germany leads at 18.9%.</canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;">
+    <p class="sec">Hiring outlook — where is the market heading?</p>
+    <div class="cw" style="margin-bottom:0;">
+      <p class="ct">Current hiring trend across all 3,000 employees</p>
+      <p class="cd">Is the market growing, holding steady, or contracting?</p>
+      <div class="leg"><span><span class="ld" style="background:#34d399;"></span>Growing (34%)</span><span><span class="ld" style="background:#facc15;"></span>Stable (34%)</span><span><span class="ld" style="background:#f87171;"></span>Declining (33%)</span></div>
+      <div style="position:relative;height:60px;"><canvas id="c6" role="img" aria-label="Horizontal stacked bar showing hiring trend: 34% Growing, 34% Stable, 33% Declining">Market is evenly split across all three hiring trends.</canvas></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const gc='rgba(255,255,255,0.04)',tc='#475569',tcy='#64748b';
+const hBar=()=>({responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.parsed.x}`}}},scales:{x:{ticks:{color:tc},grid:{color:gc}},y:{ticks:{color:'#94a3b8',font:{size:10}},grid:{display:false}}}});
+const vBar=(mn,mx)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:mn,max:mx,ticks:{color:tc},grid:{color:gc}},x:{ticks:{color:'#94a3b8',font:{size:9}},grid:{display:false}}}});
+
+new Chart(document.getElementById('c1'),{type:'bar',data:{
+  labels:['DevOps Engineer','Cloud Architect','IoT Specialist','Data Engineer','Healthcare Analyst','Teacher','Prompt Engineer','Cybersecurity Analyst'],
+  datasets:[{data:[0.57,0.56,0.53,0.52,0.52,0.52,0.52,0.51],backgroundColor:ctx=>ctx.dataIndex===0?'#ef4444':'#f87171',borderRadius:4}]
+},options:hBar()});
+
+new Chart(document.getElementById('c2'),{type:'bar',data:{
+  labels:['Cloud Computing','Leadership','Communication','Cybersecurity','Azure','Deep Learning','Machine Learning','TensorFlow'],
+  datasets:[{data:[785,778,776,776,772,770,765,762],backgroundColor:ctx=>ctx.dataIndex<=1?'#22c55e':'#34d399',borderRadius:4}]
+},options:hBar()});
+
+new Chart(document.getElementById('c3'),{type:'bar',data:{
+  labels:['Education','Energy','Finance','Govt','Healthcare','Mfg','Media','Retail','Tech','Transport'],
+  datasets:[
+    {label:'Risk',data:[0.50,0.50,0.53,0.53,0.48,0.50,0.49,0.50,0.52,0.49],backgroundColor:'#f87171',borderRadius:3},
+    {label:'Demand',data:[0.60,0.60,0.61,0.62,0.61,0.61,0.59,0.60,0.59,0.59],backgroundColor:'#a78bfa',borderRadius:3}
+  ]
+},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0.4,max:0.7,ticks:{color:tc},grid:{color:gc}},x:{ticks:{color:'#94a3b8',font:{size:9}},grid:{display:false}}}}});
+
+new Chart(document.getElementById('c4'),{type:'bar',data:{
+  labels:['Software Dev','Cybersecurity','Product Mgr','Business Analyst','Data Scientist','IoT Specialist','Prompt Engineer','Healthcare Analyst'],
+  datasets:[{data:[0.63,0.62,0.62,0.62,0.62,0.61,0.61,0.60],backgroundColor:ctx=>ctx.dataIndex===0?'#3b82f6':'#60a5fa',borderRadius:4}]
+},options:hBar()});
+
+new Chart(document.getElementById('c5'),{type:'bar',data:{
+  labels:['Germany','Australia','Japan','India','UAE','Singapore','Pakistan','Canada','USA','UK'],
+  datasets:[{data:[18.9,18.2,17.8,17.7,17.4,17.1,16.7,16.4,16.2,15.7],backgroundColor:ctx=>ctx.dataIndex<=2?'#eab308':'#facc15',borderRadius:4}]
+},options:vBar(14,20)});
+
+new Chart(document.getElementById('c6'),{type:'bar',data:{
+  labels:['Hiring Outlook'],
+  datasets:[
+    {label:'Growing',data:[34],backgroundColor:'#34d399',borderRadius:0},
+    {label:'Stable',data:[34],backgroundColor:'#facc15',borderRadius:0},
+    {label:'Declining',data:[33],backgroundColor:'#f87171',borderRadius:0}
+  ]
+},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{stacked:true,max:101,ticks:{color:tc},grid:{color:gc}},y:{stacked:true,ticks:{display:false},grid:{display:false}}}}});
+</script>

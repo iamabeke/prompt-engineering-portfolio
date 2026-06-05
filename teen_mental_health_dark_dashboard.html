@@ -1,0 +1,160 @@
+
+<h2 class="sr-only">Teen Mental Health Dashboard — stress, anxiety and sleep impact from social media, dark theme</h2>
+
+<style>
+.dash { background:#111317; border-radius:16px; padding:1.5rem; font-family:sans-serif; color:#e8e8e8; }
+.section-label { font-size:11px; font-weight:500; letter-spacing:.08em; color:#6b7280; text-transform:uppercase; margin:0 0 10px; }
+.metric-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:1.25rem; }
+.metric { background:#1a1d24; border-radius:10px; padding:.9rem 1rem; }
+.metric-val { font-size:26px; font-weight:500; margin:4px 0 2px; }
+.metric-sub { font-size:11px; color:#6b7280; margin:0; }
+.insight-box { background:#1a1d24; border-radius:10px; padding:.9rem 1rem; margin-bottom:10px; border-left:3px solid; }
+.chart-wrap { background:#1a1d24; border-radius:10px; padding:1rem; margin-bottom:10px; }
+.chart-title { font-size:12px; font-weight:500; color:#9ca3af; margin:0 0 10px; }
+.legend { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:8px; font-size:11px; color:#6b7280; }
+.legend span { display:flex; align-items:center; gap:5px; }
+.legend-dot { width:10px; height:10px; border-radius:2px; display:inline-block; }
+.charts-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+</style>
+
+<div class="dash">
+
+  <p style="font-size:15px;font-weight:500;margin:0 0 4px;color:#f3f4f6;">Teen Mental Health & Social Media</p>
+  <p style="font-size:12px;color:#6b7280;margin:0 0 1.25rem;">1,200 teens · ages 13–19 · stress, anxiety & sleep focus</p>
+
+  <p class="section-label">Key metrics</p>
+  <div class="metric-grid">
+    <div class="metric">
+      <p style="font-size:11px;color:#6b7280;margin:0;">Avg stress</p>
+      <p class="metric-val" style="color:#ef4444;">5.1<span style="font-size:13px;color:#6b7280;"> /10</span></p>
+      <p class="metric-sub">Peaks at age 16–17</p>
+    </div>
+    <div class="metric">
+      <p style="font-size:11px;color:#6b7280;margin:0;">Avg anxiety</p>
+      <p class="metric-val" style="color:#f97316;">5.5<span style="font-size:13px;color:#6b7280;"> /10</span></p>
+      <p class="metric-sub">Higher than stress</p>
+    </div>
+    <div class="metric">
+      <p style="font-size:11px;color:#6b7280;margin:0;">Avg sleep</p>
+      <p class="metric-val" style="color:#60a5fa;">6.1<span style="font-size:13px;color:#6b7280;"> hrs</span></p>
+      <p class="metric-sub">Recommended: 8–10 hrs</p>
+    </div>
+  </div>
+
+  <p class="section-label">Top insights</p>
+  <div class="insight-box" style="border-color:#ef4444;margin-bottom:8px;">
+    <p style="margin:0;font-size:13px;font-weight:500;color:#fca5a5;">1 · More social media = more stress & anxiety</p>
+    <p style="margin:4px 0 0;font-size:12px;color:#9ca3af;">Teens on 6–8 hrs/day score ~0.6 points higher on both metrics than those under 2 hrs.</p>
+  </div>
+  <div class="insight-box" style="border-color:#60a5fa;margin-bottom:8px;">
+    <p style="margin:0;font-size:13px;font-weight:500;color:#93c5fd;">2 · Screen time before bed steals sleep</p>
+    <p style="margin:4px 0 0;font-size:12px;color:#9ca3af;">2–3 hrs of pre-sleep screen time = 0.5 fewer hrs of sleep per night vs under 1 hr.</p>
+  </div>
+  <div class="insight-box" style="border-color:#a78bfa;margin-bottom:1.25rem;">
+    <p style="margin:0;font-size:13px;font-weight:500;color:#c4b5fd;">3 · All teens are sleep-deprived</p>
+    <p style="margin:4px 0 0;font-size:12px;color:#9ca3af;">Average 6.1 hrs across the board — nearly 2 hrs below the recommended minimum.</p>
+  </div>
+
+  <p class="section-label">Charts</p>
+
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <p class="chart-title">Stress & anxiety by social media hours</p>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#ef4444;"></span>Stress</span>
+        <span><span class="legend-dot" style="background:#f97316;"></span>Anxiety</span>
+      </div>
+      <div style="position:relative;height:180px;"><canvas id="d1" role="img" aria-label="Stress and anxiety grouped by daily social media hours">Higher usage correlates with higher stress and anxiety.</canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <p class="chart-title">Sleep hours by pre-bed screen time</p>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#60a5fa;"></span>Avg sleep</span>
+      </div>
+      <div style="position:relative;height:180px;"><canvas id="d2" role="img" aria-label="Average sleep hours by pre-sleep screen time bracket">More screen time before sleep leads to less sleep.</canvas></div>
+    </div>
+  </div>
+
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <p class="chart-title">Stress & anxiety by age</p>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#ef4444;"></span>Stress</span>
+        <span><span class="legend-dot" style="background:#f97316;border-style:dashed;"></span>Anxiety</span>
+      </div>
+      <div style="position:relative;height:180px;"><canvas id="d3" role="img" aria-label="Stress and anxiety trend by teen age group 13 to 19">Peak stress and anxiety at ages 16 to 17.</canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <p class="chart-title">Platform split</p>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#60a5fa;"></span>Instagram</span>
+        <span><span class="legend-dot" style="background:#f97316;"></span>TikTok</span>
+        <span><span class="legend-dot" style="background:#a78bfa;"></span>Both</span>
+      </div>
+      <div style="position:relative;height:180px;"><canvas id="d4" role="img" aria-label="Doughnut chart showing roughly equal split between Instagram, TikTok, and Both">Teens are evenly spread across platforms.</canvas></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const gridColor = 'rgba(255,255,255,0.06)';
+const tickColor = '#6b7280';
+const baseOpts = (yMin, yMax) => ({
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    y: { min: yMin, max: yMax, ticks: { color: tickColor, stepSize: 1 }, grid: { color: gridColor } },
+    x: { ticks: { color: tickColor }, grid: { display: false } }
+  }
+});
+
+new Chart(document.getElementById('d1'), {
+  type: 'bar',
+  data: {
+    labels: ['0–2 hrs','2–4 hrs','4–6 hrs','6–8 hrs'],
+    datasets: [
+      { label:'Stress', data:[4.8,5.0,5.2,5.4], backgroundColor:'#ef4444', borderRadius:4 },
+      { label:'Anxiety', data:[5.1,5.3,5.5,5.8], backgroundColor:'#f97316', borderRadius:4 }
+    ]
+  },
+  options: baseOpts(4, 7)
+});
+
+new Chart(document.getElementById('d2'), {
+  type: 'line',
+  data: {
+    labels: ['0–1 hr','1–2 hrs','2–3 hrs'],
+    datasets: [{
+      label:'Sleep',
+      data:[6.4,6.1,5.9],
+      borderColor:'#60a5fa',
+      backgroundColor:'rgba(96,165,250,0.1)',
+      tension:0.4, fill:true, pointRadius:5, pointBackgroundColor:'#60a5fa'
+    }]
+  },
+  options: baseOpts(5.5, 7)
+});
+
+new Chart(document.getElementById('d3'), {
+  type: 'line',
+  data: {
+    labels: ['13','14','15','16','17','18','19'],
+    datasets: [
+      { label:'Stress', data:[4.8,5.0,5.1,5.2,5.3,5.1,5.0], borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,0.08)', tension:0.4, fill:true, pointRadius:4, pointBackgroundColor:'#ef4444' },
+      { label:'Anxiety', data:[5.2,5.4,5.5,5.6,5.5,5.4,5.3], borderColor:'#f97316', backgroundColor:'rgba(249,115,22,0.08)', tension:0.4, fill:true, pointRadius:4, pointBackgroundColor:'#f97316', borderDash:[5,3] }
+    ]
+  },
+  options: baseOpts(4, 7)
+});
+
+new Chart(document.getElementById('d4'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Instagram','TikTok','Both'],
+    datasets: [{ data:[400,401,399], backgroundColor:['#60a5fa','#f97316','#a78bfa'], borderWidth:0 }]
+  },
+  options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, cutout:'68%' }
+});
+</script>
