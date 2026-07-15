@@ -138,10 +138,11 @@ Flag exactly 3 insights a business leader would act on today.
 # 🏦 Project 4 — AI-Assisted Financial Data Transformation & Reconciliation
 
 **Dataset 1:** 1,000 GL Journal Entry records · MS SQL Server → Oracle GL Interface  
-https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/GL_Transactions_Source.csv 
 **Dataset 2:** 1,000 Employee Timesheet records · Timesheet-to-Purchase Order Matching  
-https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/Timesheet_PO_Matching.csv
 **Tool used:** Claude (Anthropic) — AI-assisted data validation, transformation & reconciliation
+
+- 📄 [GL_Transactions_Source.csv](https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/GL_Transactions_Source.csv)
+- 📄 [Timesheet_PO_Matching.csv](https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/Timesheet_PO_Matching.csv)
 
 ---
 ## 🧩 Business Context
@@ -154,6 +155,11 @@ Every period-end, financial data flows from source systems (Microsoft SQL Server
 **The AI-assisted approach:** prompt-driven analysis that flags errors, explains root causes, and recommends fixes — in minutes.
 
 ---
+## 🧪 Prompt Evolution — The Core Skill
+*(See full prompt iterations in [Oracle_Bridge_README.md](Oracle_Bridge_README.md))*
+
+---
+
 ## 📊 Key Business Insights
 
 ### GL Transactions
@@ -195,13 +201,3 @@ Every period-end, financial data flows from source systems (Microsoft SQL Server
 - AI-assisted analysis using Claude (Anthropic)
 
 ---
-## 📬 Contact
-
-- **Email:** mrs.adesanya22@gmail.com
-- **LinkedIn:** [Femi Adesanya](https://www.linkedin.com/in/femi-adesanya-26a96915)
-- **GitHub:** [github.com/iamabeke](https://github.com/iamabeke)
-- **Open to:** Data Analyst · AI Analyst · Prompt Engineer · Oracle Data Specialist · Freelance/Contract
-
----
-
-*This portfolio is actively updated. New projects added regularly.*
