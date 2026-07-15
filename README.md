@@ -135,6 +135,66 @@ Flag exactly 3 insights a business leader would act on today.
 
 ---
 
+# 🏦 Project 4 — AI-Assisted Financial Data Transformation & Reconciliation
+
+**Dataset 1:** 1,000 GL Journal Entry records · MS SQL Server → Oracle GL Interface  
+https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/GL_Transactions_Source.csv 
+**Dataset 2:** 1,000 Employee Timesheet records · Timesheet-to-Purchase Order Matching  
+https://github.com/iamabeke/prompt-engineering-portfolio/blob/main/Timesheet_PO_Matching.csv
+**Tool used:** Claude (Anthropic) — AI-assisted data validation, transformation & reconciliation
+
+---
+## 🧩 Business Context
+
+This project is grounded in real enterprise work — the kind that runs quietly in the background of every finance department.
+
+Every period-end, financial data flows from source systems (Microsoft SQL Server) into Oracle's GL interface tables. If that data arrives with errors — missing cost centres, invalid accounts, currency mismatches, unmatched purchase orders — the posting fails, finance teams scramble, and reporting is delayed.
+
+**The traditional approach:** manual validation scripts, DBA involvement, hours of reconciliation.  
+**The AI-assisted approach:** prompt-driven analysis that flags errors, explains root causes, and recommends fixes — in minutes.
+
+---
+## 📊 Key Business Insights
+
+### GL Transactions
+| # | Insight | Action |
+|---|---|---|
+| 1 | 150 ERROR records block Oracle GL load — 15% of total volume | Remediate before period close |
+| 2 | MISSING_COST_CENTRE is the #1 error type | Update source system validation rules |
+| 3 | 182 PENDING records risk delaying financial reporting | Prioritise review within 24hrs |
+
+### Timesheet / PO Matching
+| # | Insight | Action |
+|---|---|---|
+| 1 | 188 OVER_CLAIMED records represent unauthorised spend | Procurement to review and re-approve or reject |
+| 2 | 156 UNMATCHED timesheets cannot post to Oracle GL | Employees to resubmit with valid PO reference |
+| 3 | 506 records (51%) require intervention before posting | Finance Controller to escalate to department heads |
+
+---
+
+## 📈 Prompt Score Progression
+
+| Dataset | Attempt | Score | Key Improvement |
+|---|---|---|---|
+| GL Transactions | 1 | 7.0 / 10 | Baseline |
+| GL Transactions | 2 | 8.5 / 10 | Role, context, structured outputs |
+| GL Transactions | 3 | 9.5 / 10 | Audience, priority order, audit-ready framing |
+| Timesheet / PO | 1 | 7.0 / 10 | Baseline |
+| Timesheet / PO | 2 | 8.5 / 10 | Context, financial exposure quantified |
+| Timesheet / PO | 3 | 9.5 / 10 | Executive summary, procurement actions, audit framing |
+
+---
+
+## 🛠️ Skills Demonstrated
+
+- Prompt Engineering (iterative, scored, measurably improved)
+- Financial data transformation — MS SQL Server → Oracle GL
+- ETL validation and error classification
+- Timesheet-to-Purchase Order reconciliation
+- Audit-ready reporting for Finance Controllers
+- AI-assisted analysis using Claude (Anthropic)
+
+---
 ## 📬 Contact
 
 - **Email:** mrs.adesanya22@gmail.com
