@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oracle GL Bridge — Finance Reconciliation Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --accent-green: #00e5a0;
+    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-orange: #f97316;
+    --text-primary: #e2e8f0;
+    --text-secondary: #64748b;
+    --text-dim: #334155;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .header-icon {
+    width: 40px; height: 40px;
+    background: var(--accent-green);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .header-title { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+  .header-sub { font-size: 12px; color: var(--text-secondary); font-family: var(--mono); margin-top: 2px; }
+  .header-badge {
+    background: rgba(0,229,160,0.1);
+    border: 1px solid rgba(0,229,160,0.3);
+    color: var(--accent-green);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 40px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .tab:hover { color: var(--text-primary); }
+  .tab.active { color: var(--accent-green); border-bottom-color: var(--accent-green); }
+
+  /* MAIN */
+  .main { padding: 32px 40px; max-width: 1400px; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* KPI GRID */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .kpi.green::before { background: var(--accent-green); }
+  .kpi.red::before { background: var(--accent-red); }
+  .kpi.amber::before { background: var(--accent-amber); }
+  .kpi.blue::before { background: var(--accent-blue); }
+  .kpi.orange::before { background: var(--accent-orange); }
+
+  .kpi-label { font-size: 11px; color: var(--text-secondary); font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .kpi-value { font-size: 28px; font-weight: 600; font-family: var(--mono); line-height: 1; }
+  .kpi-sub { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+  .kpi.green .kpi-value { color: var(--accent-green); }
+  .kpi.red .kpi-value { color: var(--accent-red); }
+  .kpi.amber .kpi-value { color: var(--accent-amber); }
+  .kpi.blue .kpi-value { color: var(--accent-blue); }
+  .kpi.orange .kpi-value { color: var(--accent-orange); }
+
+  /* TWO COL */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+    margin-bottom: 20px;
+  }
+
+  /* BAR CHART */
+  .bar-chart { display: flex; flex-direction: column; gap: 12px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label { font-size: 12px; color: var(--text-secondary); width: 140px; flex-shrink: 0; font-family: var(--mono); }
+  .bar-track { flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  .bar-val { font-size: 12px; font-family: var(--mono); font-weight: 600; width: 60px; text-align: right; }
+
+  /* DONUT */
+  .donut-wrap { display: flex; align-items: center; gap: 24px; }
+  .donut-svg { flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { color: var(--text-secondary); }
+  .legend-val { font-family: var(--mono); font-weight: 600; margin-left: auto; padding-left: 12px; }
+
+  /* STATUS TABLE */
+  .status-table { width: 100%; border-collapse: collapse; }
+  .status-table th {
+    font-size: 10px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .status-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--text-dim);
+  }
+  .status-table tr:last-child td { border-bottom: none; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 600;
+  }
+  .badge-green { background: rgba(0,229,160,0.1); color: var(--accent-green); }
+  .badge-red { background: rgba(239,68,68,0.1); color: var(--accent-red); }
+  .badge-amber { background: rgba(245,158,11,0.1); color: var(--accent-amber); }
+  .badge-blue { background: rgba(59,130,246,0.1); color: var(--accent-blue); }
+  .badge-orange { background: rgba(249,115,22,0.1); color: var(--accent-orange); }
+
+  /* INSIGHT BOX */
+  .insights { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .insight {
+    background: var(--surface2);
+    border-left: 3px solid;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .insight.critical { border-color: var(--accent-red); }
+  .insight.warning { border-color: var(--accent-amber); }
+  .insight.info { border-color: var(--accent-blue); }
+  .insight-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .insight.critical .insight-num { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+  .insight.warning .insight-num { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .insight.info .insight-num { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
+  .insight-text { font-size: 13px; line-height: 1.5; }
+  .insight-action { font-size: 11px; color: var(--text-secondary); margin-top: 4px; font-family: var(--mono); }
+
+  /* PROMPT SECTION */
+  .prompt-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .prompt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .prompt-attempt { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); }
+  .score-pill {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .score-7 { background: rgba(100,116,139,0.2); color: #94a3b8; }
+  .score-85 { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .score-95 { background: rgba(0,229,160,0.15); color: var(--accent-green); }
+  .prompt-text {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: #94a3b8;
+    border-left: 2px solid var(--border);
+    padding-left: 14px;
+  }
+  .prompt-text em { color: var(--accent-green); font-style: normal; }
+  .prompt-improvement {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+  }
+  .prompt-improvement span { color: var(--accent-amber); }
+
+  /* SCORE PROGRESS */
+  .score-progress { display: flex; align-items: center; gap: 0; margin-bottom: 32px; }
+  .score-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .score-circle {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-weight: 600; font-size: 14px;
+    border: 2px solid;
+  }
+  .score-circle.s7 { border-color: #334155; color: #94a3b8; background: rgba(51,65,85,0.3); }
+  .score-circle.s85 { border-color: var(--accent-amber); color: var(--accent-amber); background: rgba(245,158,11,0.1); }
+  .score-circle.s95 { border-color: var(--accent-green); color: var(--accent-green); background: rgba(0,229,160,0.1); }
+  .score-arrow { color: var(--text-dim); font-size: 18px; margin: 0 8px; padding-bottom: 20px; }
+  .score-step-label { font-size: 11px; color: var(--text-secondary); font-family: var(--mono); }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-icon">🏦</div>
+    <div>
+      <div class="header-title">Oracle GL Bridge — Finance Reconciliation</div>
+      <div class="header-sub">MS SQL Server → Oracle GL Interface · AI-Assisted Analysis · 2,000 records</div>
+    </div>
+  </div>
+  <div class="header-badge">⚡ AI-POWERED · CLAUDE ANTHROPIC</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPanel('gl')">GL Transactions</div>
+  <div class="tab" onclick="showPanel('ts')">Timesheet / PO Matching</div>
+  <div class="tab" onclick="showPanel('prompts')">Prompt Engineering</div>
+</div>
+
+<div class="main">
+
+  <!-- GL PANEL -->
+  <div id="panel-gl" class="panel active">
+
+    <div class="section-label">GL Journal Entry Validation — 1,000 Records · Period: Jan–Dec 2024</div>
+
+    <div class="kpi-grid">
+      <div class="kpi green">
+        <div class="kpi-label">✅ Ready to Post</div>
+        <div class="kpi-value">668</div>
+        <div class="kpi-sub">£17,051,123 posting-ready</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpi-label">❌ Blocked — Error</div>
+        <div class="kpi-value">150</div>
+        <div class="kpi-sub">£3,819,207 at risk</div>
+      </div>
+      <div class="kpi amber">
+        <div class="kpi-label">⏳ Pending Review</div>
+        <div class="kpi-value">182</div>
+        <div class="kpi-sub">£4,733,550 on hold</div>
+      </div>
+      <div class="kpi blue">
+        <div class="kpi-label">💷 Total Value</div>
+        <div class="kpi-value">£25.6M</div>
+        <div class="kpi-sub">across all 1,000 entries</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Error Classification</div>
+        <div class="card-sub">Root cause breakdown · 150 blocked records</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">Currency Mismatch</div>
+            <div class="bar-track"><div class="bar-fill" style="width:31%;background:var(--accent-red)"></div></div>
+            <div class="bar-val" style="color:var(--accent-red)">22</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Duplicate Entry</div>
+            <div class="bar-track"><div class="bar-fill" style="width:29%;background:var(--accent-orange)"></div></div>
+            <div class="bar-val" style="color:var(--accent-orange)">21</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Missing Cost Centre</div>
+            <div class="bar-track"><div class="bar-fill" style="width:19%;background:var(--accent-amber)"></div></div>
+            <div class="bar-val" style="color:var(--accent-amber)">14</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Invalid Account</div>
+            <div class="bar-track"><div class="bar-fill" style="width:19%;background:var(--accent-blue)"></div></div>
+            <div class="bar-val" style="color:var(--accent-blue)">14</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Errors by Legal Entity</div>
+        <div class="card-sub">Distribution across company codes</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">CORP-US</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent-red)"></div></div>
+            <div class="bar-val" style="color:var(--accent-red)">39</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CORP-UK</div>
+            <div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--accent-orange)"></div></div>
+            <div class="bar-val" style="color:var(--accent-orange)">37</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CORP-NG</div>
+            <div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--accent-amber)"></div></div>
+            <div class="bar-val" style="color:var(--accent-amber)">37</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">CORP-ZA</div>
+            <div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--accent-blue)"></div></div>
+            <div class="bar-val" style="color:var(--accent-blue)">37</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Finance Controller — 3 Actions Required Before Period Close</div>
+    <div class="insights">
+      <div class="insight critical">
+        <div class="insight-num">01</div>
+        <div>
+          <div class="insight-text">150 ERROR records are blocking Oracle GL load — £3.8M cannot post until remediated. Currency Mismatch (22 records) is the top failure.</div>
+          <div class="insight-action">→ ACTION: Run source system currency validation fix before next batch extract</div>
+        </div>
+      </div>
+      <div class="insight warning">
+        <div class="insight-num">02</div>
+        <div>
+          <div class="insight-text">182 PENDING records holding £4.7M are at risk of missing the period-end posting window if not reviewed within 24 hours.</div>
+          <div class="insight-action">→ ACTION: Finance team to prioritise PENDING queue — escalate to dept heads immediately</div>
+        </div>
+      </div>
+      <div class="insight info">
+        <div class="insight-num">03</div>
+        <div>
+          <div class="insight-text">21 DUPLICATE entries detected. These must be deduped before Oracle load or the GL will overstate by the duplicate amount.</div>
+          <div class="insight-action">→ ACTION: DBA to run deduplication script on staging table before next interface run</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TIMESHEET PANEL -->
+  <div id="panel-ts" class="panel">
+
+    <div class="section-label">Timesheet to Purchase Order Reconciliation — 1,000 Records · 50 Employees</div>
+
+    <div class="kpi-grid">
+      <div class="kpi green">
+        <div class="kpi-label">✅ Matched</div>
+        <div class="kpi-value">494</div>
+        <div class="kpi-sub">£1,160,648 posting-ready</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpi-label">❌ Unmatched</div>
+        <div class="kpi-value">156</div>
+        <div class="kpi-sub">£367,107 blocked</div>
+      </div>
+      <div class="kpi orange">
+        <div class="kpi-label">🚨 Over-Claimed</div>
+        <div class="kpi-value">188</div>
+        <div class="kpi-sub">£426,221 unauthorised</div>
+      </div>
+      <div class="kpi amber">
+        <div class="kpi-label">⚠️ Partial Match</div>
+        <div class="kpi-value">162</div>
+        <div class="kpi-sub">£405,291 needs sign-off</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Match Status Breakdown</div>
+        <div class="card-sub">By volume and value</div>
+        <table class="status-table">
+          <thead>
+            <tr><th>Status</th><th>Records</th><th>Value (£)</th><th>%</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-green">MATCHED</span></td>
+              <td>494</td>
+              <td>1,160,648</td>
+              <td style="color:var(--accent-green)">49.4%</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-orange">OVER_CLAIMED</span></td>
+              <td>188</td>
+              <td>426,221</td>
+              <td style="color:var(--accent-orange)">18.8%</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">PARTIAL</span></td>
+              <td>162</td>
+              <td>405,291</td>
+              <td style="color:var(--accent-amber)">16.2%</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">UNMATCHED</span></td>
+              <td>156</td>
+              <td>367,107</td>
+              <td style="color:var(--accent-red)">15.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Issues by Department</div>
+        <div class="card-sub">Unmatched + Over-Claimed records combined</div>
+        <div class="bar-chart">
+          <div class="bar-row">
+            <div class="bar-label">IT</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent-red)"></div></div>
+            <div class="bar-val" style="color:var(--accent-red)">74</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Procurement</div>
+            <div class="bar-track"><div class="bar-fill" style="width:80%;background:var(--accent-orange)"></div></div>
+            <div class="bar-val" style="color:var(--accent-orange)">59</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Operations</div>
+            <div class="bar-track"><div class="bar-fill" style="width:76%;background:var(--accent-amber)"></div></div>
+            <div class="bar-val" style="color:var(--accent-amber)">56</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Sales</div>
+            <div class="bar-track"><div class="bar-fill" style="width:74%;background:var(--accent-blue)"></div></div>
+            <div class="bar-val" style="color:var(--accent-blue)">55</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">Finance</div>
+            <div class="bar-track"><div class="bar-fill" style="width:70%;background:#8b5cf6)"></div></div>
+            <div class="bar-val" style="color:#8b5cf6">52</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">HR</div>
+            <div class="bar-track"><div class="bar-fill" style="width:65%;background:#06b6d4"></div></div>
+            <div class="bar-val" style="color:#06b6d4">48</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Procurement Team — 3 Actions Required Before Oracle GL Posting</div>
+    <div class="insights">
+      <div class="insight critical">
+        <div class="insight-num">01</div>
+        <div>
+          <div class="insight-text">188 OVER_CLAIMED timesheets (£426,221) represent hours submitted beyond PO approval. These cannot post to Oracle GL without re-authorisation.</div>
+          <div class="insight-action">→ ACTION: Procurement to review each over-claim and either raise a PO amendment or reject the timesheet</div>
+        </div>
+      </div>
+      <div class="insight critical">
+        <div class="insight-num">02</div>
+        <div>
+          <div class="insight-text">156 UNMATCHED records (£367,107) have no valid PO reference — Oracle GL posting will fail entirely for these employees.</div>
+          <div class="insight-action">→ ACTION: Employees to resubmit timesheets with correct PO number; Procurement to confirm PO status</div>
+        </div>
+      </div>
+      <div class="insight warning">
+        <div class="insight-num">03</div>
+        <div>
+          <div class="insight-text">IT department leads all issues with 74 problematic records — a systemic PO management problem, not isolated errors.</div>
+          <div class="insight-action">→ ACTION: IT Department Head to review PO raise process and ensure timesheets are linked before submission</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROMPTS PANEL -->
+  <div id="panel-prompts" class="panel">
+
+    <div class="section-label">Prompt Engineering Evolution — GL Transaction Analysis</div>
+
+    <div class="score-progress">
+      <div class="score-step">
+        <div class="score-circle s7">7.0</div>
+        <div class="score-step-label">Attempt 1</div>
+      </div>
+      <div class="score-arrow">→</div>
+      <div class="score-step">
+        <div class="score-circle s85">8.5</div>
+        <div class="score-step-label">Attempt 2</div>
+      </div>
+      <div class="score-arrow">→</div>
+      <div class="score-step">
+        <div class="score-circle s95">9.5</div>
+        <div class="score-step-label">Attempt 3</div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">GL ANALYSIS · ATTEMPT 1</div>
+        <div class="score-pill score-7">7.0 / 10</div>
+      </div>
+      <div class="prompt-text">Analyse this financial dataset and tell me what errors exist.</div>
+      <div class="prompt-improvement">Issues: <span>No context · No audience · No format · No priority · No actionable output</span></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">GL ANALYSIS · ATTEMPT 2</div>
+        <div class="score-pill score-85">8.5 / 10</div>
+      </div>
+      <div class="prompt-text">You are a <em>data analyst</em>. I have a dataset of <em>1,000 GL journal entries</em> being transferred from MS SQL Server to Oracle GL interface tables. Analyse the dataset and:<br>— Identify all ERROR records and classify by error type<br>— Flag PENDING records that may block period-end close<br>— Calculate the total financial value at risk<br>— Present findings in a clear summary table</div>
+      <div class="prompt-improvement">Improvements: <span>Role defined · Context added · Specific outputs requested · Financial value quantified</span></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">GL ANALYSIS · ATTEMPT 3</div>
+        <div class="score-pill score-95">9.5 / 10</div>
+      </div>
+      <div class="prompt-text">You are a <em>financial data analyst supporting a period-end close</em> for a multinational company. I have 1,000 GL journal entries staged for load into <em>Oracle GL interface tables</em>, extracted from MS SQL Server. Produce a reconciliation report for the <em>Finance Controller</em>. Prioritise in this order:<br>1) ERROR records — classify by type, count and total £ value at risk<br>2) PENDING records — flag any that will block Oracle GL posting<br>3) VALID records — confirm posting-ready count and value<br>4) <em>Recommend exactly 3 actions</em> the finance team should take before period close<br>Use a summary table for each category. Keep language <em>audit-ready</em> — no jargon.</div>
+      <div class="prompt-improvement">Improvements: <span>Audience defined (Finance Controller) · Priority order set · Audit-ready language specified · Exactly 3 recommendations requested</span></div>
+    </div>
+
+    <div style="margin-top:32px">
+    <div class="section-label">Prompt Engineering Evolution — Timesheet / PO Analysis</div>
+
+    <div class="score-progress">
+      <div class="score-step">
+        <div class="score-circle s7">7.0</div>
+        <div class="score-step-label">Attempt 1</div>
+      </div>
+      <div class="score-arrow">→</div>
+      <div class="score-step">
+        <div class="score-circle s85">8.5</div>
+        <div class="score-step-label">Attempt 2</div>
+      </div>
+      <div class="score-arrow">→</div>
+      <div class="score-step">
+        <div class="score-circle s95">9.5</div>
+        <div class="score-step-label">Attempt 3</div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">TIMESHEET/PO · ATTEMPT 1</div>
+        <div class="score-pill score-7">7.0 / 10</div>
+      </div>
+      <div class="prompt-text">Review this timesheet data and check if it matches the purchase orders.</div>
+      <div class="prompt-improvement">Issues: <span>No role · No context · No format · No financial framing · No actions</span></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">TIMESHEET/PO · ATTEMPT 2</div>
+        <div class="score-pill score-85">8.5 / 10</div>
+      </div>
+      <div class="prompt-text">You are a <em>data analyst</em>. I have 1,000 employee timesheet records that need to be matched against Purchase Orders before Oracle GL posting. Identify all <em>UNMATCHED and OVER_CLAIMED</em> records, calculate the total financial exposure, and summarise by department.</div>
+      <div class="prompt-improvement">Improvements: <span>Role defined · Context added · Financial exposure requested · Department breakdown added</span></div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <div class="prompt-attempt">TIMESHEET/PO · ATTEMPT 3</div>
+        <div class="score-pill score-95">9.5 / 10</div>
+      </div>
+      <div class="prompt-text">You are a <em>payroll data analyst preparing a reconciliation report</em> for Finance and Procurement teams. I have 1,000 weekly timesheet records staged for <em>Oracle GL posting</em>. Each timesheet must match an approved Purchase Order within tolerance. Report in this order:<br>1) OVER_CLAIMED — hours exceed PO approval: count, £ exposure, top 5 employees<br>2) UNMATCHED — no valid PO: count, £ value, flag by department<br>3) PARTIAL — within tolerance but needs sign-off<br>4) MATCHED — confirm posting-ready count and value<br><em>Recommend exactly 3 actions Procurement should take</em> before approving Oracle GL posting. Format as an <em>executive summary — audit-ready</em>.</div>
+      <div class="prompt-improvement">Improvements: <span>Audience defined (Finance + Procurement) · Priority order set · Executive summary format · Audit-ready language · Exactly 3 actions</span></div>
+    </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>📊 Oracle GL Bridge · AI-Assisted Financial Reconciliation · 2,000 records</span>
+  <span>Built by Femi Adesanya · Prompt Engineering Portfolio · Claude (Anthropic)</span>
+</div>
+
+<script>
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
