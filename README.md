@@ -201,3 +201,4 @@ Every period-end, financial data flows from source systems (Microsoft SQL Server
 - AI-assisted analysis using Claude (Anthropic)
 
 ---
+**Live Dashboard:** [View Oracle GL Bridge Dashboard](https://iamabeke.github.io/prompt-engineering-portfolio/oracle_bridge_dashboard.html)
